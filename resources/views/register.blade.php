@@ -51,23 +51,30 @@
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Masuk ke Akun Anda</h5>
-                    <p class="text-center small">Masukkan Email & Sandi Anda untuk masuk</p>
+                    <h5 class="card-title text-center pb-0 fs-4">Buat Akun Anda</h5>
+                    <p class="text-center small">Masukkan Email & Sandi Anda untuk Buat Akun</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
-
+                  <form action="#" class="row g-3 needs-validation" novalidate>
+                    @csrf
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Email</label>
+                      <label for="name" class="form-label">Nama</label>
                       <div class="input-group has-validation">
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
+                        <input type="text" name="name" class="form-control" id="name" required>
+                        <div class="invalid-feedback">Masukan Nama Anda.</div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <label for="email" class="form-label">Email</label>
+                      <div class="input-group has-validation">
+                        <input type="text" name="email" class="form-control" id="email" required>
                         <div class="invalid-feedback">Masukan Email Anda.</div>
                       </div>
                     </div>
 
                     <div class="col-12">
-                      <label for="yourPassword" class="form-label">Sandi</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                      <label for="password" class="form-label">Sandi</label>
+                      <input type="password" name="password" class="form-control" id="password" required>
                       <div class="invalid-feedback">Masukan Sandi Anda!</div>
                     </div>
 
@@ -78,7 +85,7 @@
                       </div>
                     </div>
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Login</button>
+                      <button class="btn btn-primary w-100" type="submit">Masuk</button>
                     </div>
                     <div class="col-12">
                       <p class="small mb-0">Belum Punya Akun? <a href="pages-register.html">Daftar Akun</a></p>
