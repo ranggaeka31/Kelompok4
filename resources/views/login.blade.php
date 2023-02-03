@@ -55,33 +55,42 @@
                     <p class="text-center small">Masukkan Email & Sandi Anda untuk masuk</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
-
+                  <form action="/loginproses" method="post" class="row g-3 needs-validation" novalidate>
+                    @csrf
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Email</label>
+                      <label for="email" class="form-label">Email</label>
                       <div class="input-group has-validation">
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
+                        <input type="text" name="email" class="form-control" id="email" required>
                         <div class="invalid-feedback">Masukan Email Anda.</div>
                       </div>
                     </div>
+                    @error('email')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
 
                     <div class="col-12">
-                      <label for="yourPassword" class="form-label">Sandi</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                      <label for="password" class="form-label">Sandi</label>
+                      <input type="password" name="password" class="form-control" id="password" required>
                       <div class="invalid-feedback">Masukan Sandi Anda!</div>
                     </div>
+                    @error('password')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+                @if (session('error'))
+                    <div class="text-danger">{{ session('error') }}</div>
+                @endif
 
                     <div class="col-12">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                        <input type="checkbox" onclick="myFunction()" id="rem">
+                        <label for="rem">Tampilkan Sandi</label>
                       </div>
                     </div>
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">Belum Punya Akun? <a href="pages-register.html">Daftar Akun</a></p>
+                      <p class="small mb-0">Belum Punya Akun? <a href="/register">Daftar Akun</a></p>
                     </div>
                   </form>
 
@@ -119,4 +128,15 @@
 </body>
 
 </html>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type == "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 
