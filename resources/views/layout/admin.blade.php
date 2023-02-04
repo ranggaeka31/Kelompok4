@@ -128,7 +128,7 @@
       <li class="nav-item">
         <a class="nav-link " href="index.html">
           <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
+          <span>Beranda</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
@@ -138,12 +138,7 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
-              <i class="bi bi-circle"></i><span>Alerts</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-accordion.html">
+            <a href="/datapenabung">
               <i class="bi bi-circle"></i><span>Accordion</span>
             </a>
           </li>

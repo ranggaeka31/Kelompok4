@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PenabungController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,3 +30,13 @@ Route::post('/loginproses', [LoginController::class, 'loginproses'])->name('logi
 Route::get('/register', [LoginController::class, 'register'])->name('register');
 Route::post('/registeruser', [LoginController::class, 'registeruser'])->name('registeruser');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+//Penabung
+Route::get('/datapenabung', [PenabungController::class, 'datapenabung'])->name('datapenabung');
+Route::get('/tambahpenabung', [PenabungController::class, 'tambahpenabung'])->name('tambahpenabung');
+Route::post('/insertpenabung', [PenabungController::class, 'insertpenabung'])->name('insertpenabung');
+Route::get('/editpenabung', [PenabungController::class, 'editpenabung'])->name('editpenabung');
+Route::post('/updatepenabung', [PenabungController::class, 'updatepenabung'])->name('updatepenabung');
+Route::get('/hapuspenabung', [PenabungController::class, 'hapuspenabung'])->name('hapuspenabung');
+
