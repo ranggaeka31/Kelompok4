@@ -130,7 +130,8 @@
           <i class="bi bi-grid"></i>
           <span>Beranda</span>
         </a>
-      </li><!-- End Dashboard Nav -->
+      
+        </li><!-- End Dashboard Nav -->
       <li class="nav-item">
         <a class="nav-link " href="/datapenabung">
           <i class="bi bi-grid"></i>
@@ -138,6 +139,14 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
+          </li><!-- End Dashboard Nav -->
+          <li class="nav-item">
+            <a class="nav-link " href="/datapenabung">
+              <i class="bi bi-grid"></i>
+              <span>uangkeluar</span>
+            </a>
+            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+              <li>
             <a href="uangkeluar">
               <i class="bi bi-circle"></i><span>uangkeluar</span>
             </a>
@@ -192,3 +201,4 @@
 </body>
 
 </html>
+
