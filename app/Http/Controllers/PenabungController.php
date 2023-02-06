@@ -19,21 +19,21 @@ class PenabungController extends Controller
     }
     public function insertpenabung(Request $request)
     {
-        // $validated = $request->validate([
-        //     'penabung' => 'required',
-        //     'jenis_kelamin' => 'required',
-        //     'alamat' => 'required',
-        //     'notelpon' => 'required',
-        //     'jumlah_uang' => 'required',
-        //     'foto' => 'required',
-        // ], [
-        //     'penabung.required' => 'penabung Harus Diisi!',
-        //     'jenis_kelamin.required' => 'jenis_kelamin Harus Diisi!',
-        //     'alamat.required' => 'alamat Harus Diisi!',
-        //     'notelpon.required' => 'notelpon Harus Diisi!',
-        //     'jumlah_uang.required' => 'jumlah_uang Harus Diisi!',
-        //     'foto.required' => 'foto Harus Diisi!',
-        // ]);
+        $validated = $request->validate([
+            'penabung' => 'required',
+            'jenis_kelamin' => 'required',
+            'alamat' => 'required',
+            'notelpon' => 'required',
+            'jumlah_uang' => 'required',
+            'foto' => 'required',
+        ], [
+            'penabung.required' => 'penabung Harus Diisi!',
+            'jenis_kelamin.required' => 'jenis_kelamin Harus Diisi!',
+            'alamat.required' => 'alamat Harus Diisi!',
+            'notelpon.required' => 'notelpon Harus Diisi!',
+            'jumlah_uang.required' => 'jumlah_uang Harus Diisi!',
+            'foto.required' => 'foto Harus Diisi!',
+        ]);
 
         $data = penabung::create([
             'penabung' => $request->penabung,
@@ -41,13 +41,12 @@ class PenabungController extends Controller
             'alamat' => $request->alamat,
             'notelpon' => $request->notelpon,
             'jumlah_uang' => $request->jumlah_uang,
+            'foto' => $request->foto,
         ]);
-        if ($files = $request->file('foto')) {
-            foreach ($files as $file) {
-                $name = $file->getClientOriginalName();
-                $file->move('fotopenabung/', $name);
-                $images[] = $name;
-            }
+        if ($request->hasFile('foto')) {
+            $request->file('foto')->move('fotopenabung/', $request->file('foto')->getClientOriginalName());
+            $data->foto = $request->file('foto')->getClientOriginalName();
+            $data->save();
         }
         return redirect()->route('datapenabung')->with('success', 'Data Berhasil Di Tambahkan');
     }
@@ -73,8 +72,12 @@ class PenabungController extends Controller
             'alamat' => $request->alamat,
             'notelpon' => $request->notelpon,
             'jumlah_uang' => $request->jumlah_uang,
-            'foto' => $request->foto,
         ]);
+        if ($request->hasFile('foto')) {
+            $request->file('foto')->move('fotopenabung/', $request->file('foto')->getClientOriginalName());
+            $data->foto = $request->file('foto')->getClientOriginalName();
+            $data->save();
+        }
         return redirect()->route('datapenabung')->with('success', 'Data berhasil di Update!');
     }
 
@@ -86,21 +89,4 @@ class PenabungController extends Controller
         $data->delete();
         return redirect()->route('datapenabung')->with('success', 'Data Berhasil Di Hapus');
     }
-
-    // public $delete_id;
-
-    // protected $Listeners = ['deleteConfirmed'=>'hapusktgr'];
-
-    // public function deleteConfirmation($id)
-    // {
-    //     try {
-    //         $kategori = kategori::find($id);
-    //         $kategori->delete();
-    //     } catch (QueryException $e) {
-    //         if ($e->errorInfo[1] == 1451) {
-    //             return to_route('datakategori')->with('error', 'Data masih digunakan');
-    //         }
-    //     }
-    //     return redirect()->route('datakategori')->with('success', 'Data Berhasil Di Hapus');
-    // }
 }

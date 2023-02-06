@@ -65,7 +65,7 @@
 
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Foto</label>
-                <input type="file" class="form-control" name="foto" id="exampleFormControlInput1">
+                <input type="file" class="form-control" name="foto" id="foto">
             </div>
             @error('foto')
                 <div class="alert alert-danger">{{ $message }}</div>

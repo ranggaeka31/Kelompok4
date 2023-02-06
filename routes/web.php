@@ -36,7 +36,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/datapenabung', [PenabungController::class, 'datapenabung'])->name('datapenabung');
 Route::get('/tambahpenabung', [PenabungController::class, 'tambahpenabung'])->name('tambahpenabung');
 Route::post('/insertpenabung', [PenabungController::class, 'insertpenabung'])->name('insertpenabung');
-Route::get('/editpenabung', [PenabungController::class, 'editpenabung'])->name('editpenabung');
-Route::post('/updatepenabung', [PenabungController::class, 'updatepenabung'])->name('updatepenabung');
-Route::get('/hapuspenabung', [PenabungController::class, 'hapuspenabung'])->name('hapuspenabung');
+Route::get('/editpenabung/{id}', [PenabungController::class, 'editpenabung'])->name('editpenabung');
+Route::post('/updatepenabung/{id}', [PenabungController::class, 'updatepenabung'])->name('updatepenabung');
+Route::get('/hapuspenabung/{id}', [PenabungController::class, 'hapuspenabung'])->name('hapuspenabung');
 
