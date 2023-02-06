@@ -139,21 +139,23 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-          </li><!-- End Dashboard Nav -->
-          <li class="nav-item">
-            <a class="nav-link " href="/datapenabung">
-              <i class="bi bi-grid"></i>
-              <span>uangkeluar</span>
-            </a>
-            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-              <li>
-            <a href="uangkeluar">
-              <i class="bi bi-circle"></i><span>uangkeluar</span>
+            <a href="components-alerts.html">
+              <i class="bi bi-circle"></i><span>uang masuk</span>
             </a>
           </li>
           <li>
             <a href="components-accordion.html">
-              <i class="bi bi-circle"></i><span>uang masuk</span>
+              <i class="bi bi-circle"></i><span>uang keluar</span>
+            </a>
+          </li>
+          <li>
+            <a href="components-alerts.html">
+              <i class="bi bi-circle"></i><span>laporan</span>
+            </a>
+          </li>
+          <li>
+            <a href="components-alerts.html">
+              <i class="bi bi-circle"></i><span>histori</span>
             </a>
           </li>
         </ul>

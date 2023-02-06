@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PenabungController;
 use App\Http\Controllers\uangkeluarController;
+use App\Http\Controllers\HistoriController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,3 +49,10 @@ Route::post('/insertpenabung', [uangkeluarcontroller::class, 'insertpenabung'])-
 Route::get('/editpenabung', [uangkeluarcontroller::class, 'editpenabung'])->name('editpenabung');
 Route::post('/updatepenabung', [uangkeluarcontroller::class, 'updatepenabung'])->name('updatepenabung');
 Route::get('/hapuspenabung', [uangkeluarcontroller::class, 'hapuspenabung'])->name('hapuspenabung');
+//Histori
+Route::get('/histori', [HistoriController::class, 'histori'])->name('histori');
+Route::get('/tambahpenabung', [PenabungController::class, 'tambahpenabung'])->name('tambahpenabung');
+Route::post('/insertpenabung', [PenabungController::class, 'insertpenabung'])->name('insertpenabung');
+Route::get('/editpenabung', [PenabungController::class, 'editpenabung'])->name('editpenabung');
+Route::post('/updatepenabung', [PenabungController::class, 'updatepenabung'])->name('updatepenabung');
+Route::get('/hapuspenabung', [PenabungController::class, 'hapuspenabung'])->name('hapuspenabung');
