@@ -13,7 +13,7 @@
     </head>
 
     <body>
-        <h1>Data Penabung</h1>
+        <h1 class="text-center">Data Penabung</h1>
         <div class="mt-3">
             <a href="/tambahpenabung" class="btn btn-primary">Tambah Penabung</a>
         </div>
@@ -44,7 +44,7 @@
                                         <img src="{{ asset('fotopenabung/' . $row->foto) }}" class="img-fluid"
                                             alt="" style="width: 50px";></a>
                                 </td>
-                                <td>{{ $row->penabung }}</td>
+                                <td>{{ $row->nama_penabung }}</td>
                                 <td>{{ $row->jenis_kelamin }}</td>
                                 <td>{{ $row->alamat }}</td>
                                 <td>{{ $row->notelpon }}</td>

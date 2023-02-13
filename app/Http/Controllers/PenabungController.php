@@ -20,27 +20,24 @@ class PenabungController extends Controller
     public function insertpenabung(Request $request)
     {
         $validated = $request->validate([
-            'penabung' => 'required',
+            'nama_penabung' => 'required',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
             'notelpon' => 'required',
-            'jumlah_uang' => 'required',
             'foto' => 'required',
         ], [
-            'penabung.required' => 'penabung Harus Diisi!',
+            'nama_penabung.required' => 'nama_penabung Harus Diisi!',
             'jenis_kelamin.required' => 'jenis_kelamin Harus Diisi!',
             'alamat.required' => 'alamat Harus Diisi!',
             'notelpon.required' => 'notelpon Harus Diisi!',
-            'jumlah_uang.required' => 'jumlah_uang Harus Diisi!',
             'foto.required' => 'foto Harus Diisi!',
         ]);
 
         $data = penabung::create([
-            'penabung' => $request->penabung,
+            'nama_penabung' => $request->nama_penabung,
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,
             'notelpon' => $request->notelpon,
-            'jumlah_uang' => $request->jumlah_uang,
             'foto' => $request->foto,
         ]);
         if ($request->hasFile('foto')) {
@@ -67,11 +64,10 @@ class PenabungController extends Controller
     {
         $data = penabung::find($id);
         $data->update([
-            'penabung' => $request->penabung,
+            'nama_penabung' => $request->nama_penabung,
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,
             'notelpon' => $request->notelpon,
-            'jumlah_uang' => $request->jumlah_uang,
         ]);
         if ($request->hasFile('foto')) {
             $request->file('foto')->move('fotopenabung/', $request->file('foto')->getClientOriginalName());

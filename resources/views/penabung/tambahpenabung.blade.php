@@ -11,19 +11,18 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-        <title>Hello, world!</title>
     </head>
 
     <body>
-        <h1>Hello, world!</h1>
+        <h1 class="text-center">Tambah Penabung</h1>
         <form action="/insertpenabung" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Nama Penabung</label>
-                <input type="text" class="form-control" name="penabung" id="exampleFormControlInput1">
+                <input type="text" class="form-control" name="nama_penabung" id="exampleFormControlInput1">
             </div>
-            @error('penabung')
+            @error('nama_penabung')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
@@ -52,14 +51,6 @@
                 <input type="number" class="form-control" name="notelpon" id="exampleFormControlInput1">
             </div>
             @error('notelpon')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Jumlah Uang</label>
-                <input type="text" class="form-control" name="jumlah_uang" id="exampleFormControlInput1">
-            </div>
-            @error('jumlah_uang')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 

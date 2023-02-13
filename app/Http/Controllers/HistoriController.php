@@ -9,7 +9,7 @@ class HistoriController extends Controller
     public function histori()
     {
         $data = histori::all();
-        return view('penabung.histori', compact('data'));
+        return view('histori.histori', compact('data'));
     }
 
 }

@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('uangkeluars', function (Blueprint $table) {
             $table->id();
-            $table->string('tanggal');
-            $table->string('nama');
+            $table->string('penabungs_id');
             $table->string('jenis_kelamin');
             $table->string('alamat');
             $table->string('notelpon');
-            $table->string('jumlahuang');
+            $table->string('jumlah_uang');
+            $table->string('penarikan');
             $table->timestamps();
         });
     }

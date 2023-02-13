@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('uangmasuks', function (Blueprint $table) {
             $table->id();
-            $table->string('tanggal');
-            $table->string('nama');
+            $table->string('penabungs_id');
             $table->string('jenis_kelamin');
             $table->string('alamat');
             $table->string('notelpon');

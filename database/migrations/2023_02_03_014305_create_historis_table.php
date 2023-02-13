@@ -15,12 +15,10 @@ return new class extends Migration
     {
         Schema::create('historis', function (Blueprint $table) {
             $table->id();
-            $table->string('tanggal');
+            $table->string('tanggal')->nullable();
             $table->string('nama');
             $table->string('uangditabung');
             $table->string('uangdiambil');
-            $table->string('sisauang');
-            $table->string('foto');
             $table->timestamps();
         });
     }

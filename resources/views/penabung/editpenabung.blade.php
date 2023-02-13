@@ -20,7 +20,7 @@
             @csrf
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Nama Penabung</label>
-                <input type="text" class="form-control" name="penabung" value="{{ $data->penabung }}"
+                <input type="text" class="form-control" name="nama_penabung" value="{{ $data->nama_penabung }}"
                     id="exampleFormControlInput1">
             </div>
             <div class="mb-3">
@@ -44,11 +44,6 @@
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">No Telpon</label>
                 <input type="number" class="form-control" name="notelpon" value="{{ $data->notelpon }}"
-                    id="exampleFormControlInput1">
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Jumlah Uang</label>
-                <input type="text" class="form-control" name="jumlah_uang" value="{{ $data->jumlah_uang }}"
                     id="exampleFormControlInput1">
             </div>
             <div class="mb-3">

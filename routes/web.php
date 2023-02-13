@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PenabungController;
 use App\Http\Controllers\uangkeluarController;
+use App\Http\Controllers\uangmasukController;
 use App\Http\Controllers\HistoriController;
 /*
 |--------------------------------------------------------------------------
@@ -44,15 +45,22 @@ Route::get('/hapuspenabung/{id}', [PenabungController::class, 'hapuspenabung'])-
 
 //uangkeluar
 Route::get('/uangkeluar', [uangkeluarcontroller::class, 'uangkeluar'])->name('uangkeluar');
-Route::get('/tambahpenabung', [uangkeluarcontroller::class, 'tambahpenabung'])->name('tambahpenabung');
-Route::post('/insertpenabung', [uangkeluarcontroller::class, 'insertpenabung'])->name('insertpenabung');
-Route::get('/editpenabung', [uangkeluarcontroller::class, 'editpenabung'])->name('editpenabung');
-Route::post('/updatepenabung', [uangkeluarcontroller::class, 'updatepenabung'])->name('updatepenabung');
-Route::get('/hapuspenabung', [uangkeluarcontroller::class, 'hapuspenabung'])->name('hapuspenabung');
+Route::get('/tambahuangkeluar', [uangkeluarcontroller::class, 'tambahuangkeluar'])->name('tambahuangkeluar');
+Route::post('/insertuangkeluar', [uangkeluarcontroller::class, 'insertuangkeluar'])->name('insertuangkeluar');
+Route::get('/edituangkeluar/{id}', [uangkeluarcontroller::class, 'edituangkeluar'])->name('edituangkeluar');
+Route::post('/updateuangkeluar/{id}', [uangkeluarcontroller::class, 'updateuangkeluar'])->name('updateuangkeluar');
+Route::get('/hapusuangkeluar/{id}', [uangkeluarcontroller::class, 'hapusuangkeluar'])->name('hapusuangkeluar');
+
+
+//uangmasuk
+Route::get('/uangmasuk', [uangmasukcontroller::class, 'uangmasuk'])->name('uangmasuk');
+Route::get('/tambahuangmasuk', [uangmasukcontroller::class, 'tambahuangmasuk'])->name('tambahuangmasuk');
+Route::post('/insertuangmasuk', [uangmasukcontroller::class, 'insertuangmasuk'])->name('insertuangmasuk');
+Route::get('/edituangmasuk/{id}', [uangmasukcontroller::class, 'edituangmasuk'])->name('edituangmasuk');
+Route::post('/updateuangmasuk/{id}', [uangmasukcontroller::class, 'updateuangmasuk'])->name('updateuangmasuk');
+Route::get('/hapusuangmasuk/{id}', [uangmasukcontroller::class, 'hapusuangmasuk'])->name('hapusuangmasuk');
+
+
 //Histori
 Route::get('/histori', [HistoriController::class, 'histori'])->name('histori');
-Route::get('/tambahpenabung', [PenabungController::class, 'tambahpenabung'])->name('tambahpenabung');
-Route::post('/insertpenabung', [PenabungController::class, 'insertpenabung'])->name('insertpenabung');
-Route::get('/editpenabung', [PenabungController::class, 'editpenabung'])->name('editpenabung');
-Route::post('/updatepenabung', [PenabungController::class, 'updatepenabung'])->name('updatepenabung');
 Route::get('/hapuspenabung', [PenabungController::class, 'hapuspenabung'])->name('hapuspenabung');

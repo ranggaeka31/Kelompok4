@@ -4,87 +4,114 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\uangkeluar;
+use App\Models\penabung;
+use App\Models\histori;
 
 class UangkeluarController extends Controller
 {
     public function uangkeluar()
     {
-        $data = uangkeluar::all();
-        return view('uangkeluar', compact('data'));
+        $uangkeluar = uangkeluar::with('penabung')->get();
+        return view('uangkeluar.uangkeluar', compact('uangkeluar'));
     }
 
-     public function tambahpenabung()
+     public function tambahuangkeluar()
     {
-        return view('penabung.tambahpenabung');
+        $penabung = penabung::all();
+        $uangkeluar = uangkeluar::all();
+        return view('uangkeluar.tambahuangkeluar', compact('penabung','uangkeluar'));
     }
-    public function insertpenabung(Request $request)
+    public function insertuangkeluar(Request $request)
     {
-        // $validated = $request->validate([
-        //     'penabung' => 'required',
-        //     'jenis_kelamin' => 'required',
-        //     'alamat' => 'required',
-        //     'notelpon' => 'required',
-        //     'jumlah_uang' => 'required',
-        //     'foto' => 'required',
-        // ], [
-        //     'penabung.required' => 'penabung Harus Diisi!',
-        //     'jenis_kelamin.required' => 'jenis_kelamin Harus Diisi!',
-        //     'alamat.required' => 'alamat Harus Diisi!',
-        //     'notelpon.required' => 'notelpon Harus Diisi!',
-        //     'jumlah_uang.required' => 'jumlah_uang Harus Diisi!',
-        //     'foto.required' => 'foto Harus Diisi!',
-        // ]);
-
-        $data = penabung::create([
-            'penabung' => $request->penabung,
+        $validated = $request->validate([
+            'penabungs_id' => 'required',
+            'jenis_kelamin' => 'required',
+            'alamat' => 'required',
+            'notelpon' => 'required',
+            'jumlah_uang' => 'required',
+        ], [
+            'penabungs_id.required' => 'penabungs_id Harus Diisi!',
+            'jenis_kelamin.required' => 'jenis_kelamin Harus Diisi!',
+            'alamat.required' => 'alamat Harus Diisi!',
+            'notelpon.required' => 'notelpon Harus Diisi!',
+            'jumlah_uang.required' => 'jumlah_uang Harus Diisi!',
+        ]);
+        $penabung = penabung::find($request->penabungs_id);
+        if ($penabung->jumlah_uang < $request->penarikam) {
+            return response()->json([
+                'gagal' => 'Jumlah Uang Melebihi Tabungan',
+            ]);
+        } else {
+        $data = uangkeluar::create([
+            'penabungs_id' => $request->penabungs_id,
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,
             'notelpon' => $request->notelpon,
             'jumlah_uang' => $request->jumlah_uang,
+            'penarikan' => $request->penarikan,
         ]);
-        if ($files = $request->file('foto')) {
-            foreach ($files as $file) {
-                $name = $file->getClientOriginalName();
-                $file->move('fotopenabung/', $name);
-                $images[] = $name;
-            }
-        }
-        return redirect()->route('datapenabung')->with('success', 'Data Berhasil Di Tambahkan');
+        $datas = histori::create([
+            'nama' => $request->penabungs_id,
+            'uangditabung' => $request->jumlah_uang,
+            'uangdiambil' => $request->penarikan,
+        ]);
+        $stok_kurang = penabung::find($request->penabungs_id);
+        $stok_kurang->jumlah_uang -= $request->penarikan;
+        $stok_kurang->save();
+        // $subtotal = uangkeluar::sum('jumlah_uang');
+        $jumlahstok = $stok_kurang->jumlah_uang;
+        return response()->json([
+            'status' => 200,
+            'message' => 'barang keluar berhasil ditambahkan',
+            // 'subtotal' => $subtotal,
+            'jumlahstok' => $jumlahstok,
+        ]);
+    }
+        return redirect()->route('uangkeluar')->with('success', 'Data Berhasil Di Tambahkan');
     }
 
 
 
-    public function editpenabung($id)
+    public function edituangkeluar($id)
     {
-        $data = penabung::findOrFail($id);
-
-        return view('penabung.editpenabung', compact('data'));
+        $uangkeluar = uangkeluar::findOrFail($id);
+        $penabung = penabung::all();
+        return view('uangkeluar.edituangkeluar', compact('uangkeluar','penabung'));
     }
 
 
 
 
-    public function updatepenabung(request $request, $id)
+    public function updateuangkeluar(request $request, $id)
     {
-        $data = penabung::find($id);
+        $data = uangkeluar::find($id);
+        $stok_kurang = penabung::find($request->penabungs_id);
+
+        $stok_kurang->jumlah_uang += $data->penarikan;
+        $stok_kurang->jumlah_uang -= $request->penarikan;
+        $stok_kurang->save();
         $data->update([
-            'penabung' => $request->penabung,
+            'penabungs_id' => $request->penabungs_id,
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,
             'notelpon' => $request->notelpon,
             'jumlah_uang' => $request->jumlah_uang,
-            'foto' => $request->foto,
+            'penarikan' => $request->penarikan,
         ]);
-        return redirect()->route('datapenabung')->with('success', 'Data berhasil di Update!');
+        return redirect()->route('uangkeluar')->with('success', 'Data berhasil di Update!');
     }
 
 
 
-    public function hapuspenabung($id)
+    public function hapusuangkeluar($id)
     {
-        $data = penabung::find($id);
+        $data = uangkeluar::find($id);
+        $barang = penabung::find($data->penabungs_id);
+        $barang->update([
+            'jumlah_uang' => (int) $barang->jumlah_uang + $data->penarikan,
+        ]);
         $data->delete();
-        return redirect()->route('datapenabung')->with('success', 'Data Berhasil Di Hapus');
+        return redirect()->route('uangkeluar')->with('success', 'Data Berhasil Di Hapus');
     }
 
     // public $delete_id;
@@ -104,4 +131,3 @@ class UangkeluarController extends Controller
     //     return redirect()->route('datakategori')->with('success', 'Data Berhasil Di Hapus');
     // }
 }
-

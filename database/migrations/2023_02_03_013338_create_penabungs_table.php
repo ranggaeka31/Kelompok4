@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('penabungs', function (Blueprint $table) {
             $table->id();
-            $table->string('penabung');
+            $table->string('nama_penabung');
             $table->string('jenis_kelamin');
             $table->string('alamat');
             $table->string('notelpon');
-            $table->string('jumlah_uang');
+            $table->string('jumlah_uang')->nullable();
             $table->string('foto');
             $table->timestamps();
         });
