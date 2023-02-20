@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\uangmasuk;
 use App\Models\penabung;
+use App\Models\laporanmasuk;
+use Carbon\Carbon;
 
 class UangmasukController extends Controller
 {
@@ -37,6 +39,13 @@ class UangmasukController extends Controller
         ]);
         $stok_nambah = penabung::find($request->penabungs_id);
         $data = uangmasuk::create([
+            'penabungs_id' => $request->penabungs_id,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'alamat' => $request->alamat,
+            'notelpon' => $request->notelpon,
+            'jumlah_uang' => $request->jumlah_uang,
+        ]);
+        $laporan = laporanmasuk::create([
             'penabungs_id' => $request->penabungs_id,
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,

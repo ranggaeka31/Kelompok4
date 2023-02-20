@@ -7,6 +7,8 @@ use App\Http\Controllers\PenabungController;
 use App\Http\Controllers\uangkeluarController;
 use App\Http\Controllers\uangmasukController;
 use App\Http\Controllers\HistoriController;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\LaporanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,10 +24,9 @@ Route::get('/', function () {
     return view('login');
 });
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
 
+//Beranda
+Route::get('/welcome', [WelcomeController::class, 'welcome'])->name('welcome')->middleware('auth');
 
 //login
 Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
@@ -63,4 +64,16 @@ Route::get('/hapusuangmasuk/{id}', [uangmasukcontroller::class, 'hapusuangmasuk'
 
 //Histori
 Route::get('/histori', [HistoriController::class, 'histori'])->name('histori');
-Route::get('/hapuspenabung', [PenabungController::class, 'hapuspenabung'])->name('hapuspenabung');
+
+
+//Laporan
+Route::get('/laporanmasuk', [LaporanController::class, 'laporanmasuk'])->name('laporanmasuk');
+Route::post('/laporanmasuk', [LaporanController::class, 'searchmasuk'])->name('laporanmasuk');
+Route::get('/laporankeluar', [LaporanController::class, 'laporankeluar'])->name('laporankeluar');
+Route::post('/laporankeluar', [LaporanController::class, 'searchkeluar'])->name('laporankeluar');
+// Route::get('/hapuspenabung', [PenabungController::class, 'hapuspenabung'])->name('hapuspenabung');
+
+
+//PDF
+Route::get('/masukpdf', [LaporanController::class, 'masukpdf'])->name('masukpdf');
+Route::get('/keluarpdf', [LaporanController::class, 'keluarpdf'])->name('keluarpdf');

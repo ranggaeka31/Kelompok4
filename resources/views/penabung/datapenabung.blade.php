@@ -10,16 +10,17 @@
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
     </head>
 
     <body>
         <h1 class="text-center">Data Penabung</h1>
         <div class="mt-3">
-            <a href="/tambahpenabung" class="btn btn-primary">Tambah Penabung</a>
+            <a href="/tambahpenabung" class="btn btn-primary"><i class="bx bx-plus"></i></a>
         </div>
         <div class="row mt-3">
             <div class="container">
-                <table class="table table-bordered table-hover">
+                <table class="table table-hover" id="example">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
@@ -29,6 +30,7 @@
                             <th scope="col">Alamat</th>
                             <th scope="col">No Telpon</th>
                             <th scope="col">Jumlah Uang</th>
+                            <th scope="col">Jumlah Uang Ditarik</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
@@ -49,10 +51,13 @@
                                 <td>{{ $row->alamat }}</td>
                                 <td>{{ $row->notelpon }}</td>
                                 <td>Rp. {{ number_format($row['jumlah_uang'], 2, '.', '.') }}</td>
+                                <td>Rp. {{ number_format($row['jumlah_ditarik'], 2, '.', '.') }}</td>
                                 <td>
-                                    <a href="/editpenabung/{{ $row->id }}" class="btn btn-success mb-1"></i>Edit Data</a><br>
+                                    <a href="/editpenabung/{{ $row->id }}" class="btn btn-success mb-1">
+                                        <i class="bx bxs-pencil"></i></a><br>
                                     <a href="/hapuspenabung/{{ $row->id }}" class="btn btn-danger"
-                                        onclick="return confirm('Yakin Ingin Menghapus Data Ini ')">Hapus</a>
+                                        onclick="return confirm('Yakin Ingin Menghapus Data Ini ')"><i
+                                            class="bx bx-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -66,7 +71,10 @@
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
         </script>
 
+
     </body>
+
+    @include('sweetalert::alert')
 
     </html>
 @endsection

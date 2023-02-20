@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\uangkeluar;
 use App\Models\penabung;
+use App\Models\laporankeluar;
 use App\Models\histori;
+use Illuminate\Support\Facades\Validator;
 
 class UangkeluarController extends Controller
 {
@@ -23,7 +25,7 @@ class UangkeluarController extends Controller
     }
     public function insertuangkeluar(Request $request)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(),[
             'penabungs_id' => 'required',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
@@ -36,8 +38,14 @@ class UangkeluarController extends Controller
             'notelpon.required' => 'notelpon Harus Diisi!',
             'jumlah_uang.required' => 'jumlah_uang Harus Diisi!',
         ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors()->messages(),
+            ]);
+        }
         $penabung = penabung::find($request->penabungs_id);
-        if ($penabung->jumlah_uang < $request->penarikam) {
+        if ($penabung->jumlah_uang < $request->penarikan) {
             return response()->json([
                 'gagal' => 'Jumlah Uang Melebihi Tabungan',
             ]);
@@ -55,20 +63,29 @@ class UangkeluarController extends Controller
             'uangditabung' => $request->jumlah_uang,
             'uangdiambil' => $request->penarikan,
         ]);
+        $laporan = laporankeluar::create([
+            'penabungs_id' => $request->penabungs_id,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'alamat' => $request->alamat,
+            'notelpon' => $request->notelpon,
+            'jumlah_uang' => $request->jumlah_uang,
+            'penarikan' => $request->penarikan,
+        ]);
         $stok_kurang = penabung::find($request->penabungs_id);
+        $stok_nambah = penabung::find($request->penabungs_id);
         $stok_kurang->jumlah_uang -= $request->penarikan;
         $stok_kurang->save();
-        // $subtotal = uangkeluar::sum('jumlah_uang');
+        $stok_nambah->jumlah_ditarik += $request->penarikan;
+        $stok_nambah->save();
         $jumlahstok = $stok_kurang->jumlah_uang;
         return response()->json([
             'status' => 200,
-            'message' => 'barang keluar berhasil ditambahkan',
-            // 'subtotal' => $subtotal,
+            'message' => 'uang keluar berhasil ditambahkan',
             'jumlahstok' => $jumlahstok,
         ]);
+
     }
-        return redirect()->route('uangkeluar')->with('success', 'Data Berhasil Di Tambahkan');
-    }
+}
 
 
 
@@ -113,21 +130,4 @@ class UangkeluarController extends Controller
         $data->delete();
         return redirect()->route('uangkeluar')->with('success', 'Data Berhasil Di Hapus');
     }
-
-    // public $delete_id;
-
-    // protected $Listeners = ['deleteConfirmed'=>'hapusktgr'];
-
-    // public function deleteConfirmation($id)
-    // {
-    //     try {
-    //         $kategori = kategori::find($id);
-    //         $kategori->delete();
-    //     } catch (QueryException $e) {
-    //         if ($e->errorInfo[1] == 1451) {
-    //             return to_route('datakategori')->with('error', 'Data masih digunakan');
-    //         }
-    //     }
-    //     return redirect()->route('datakategori')->with('success', 'Data Berhasil Di Hapus');
-    // }
 }

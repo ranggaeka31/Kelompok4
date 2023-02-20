@@ -31,6 +31,9 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('NiceAdmin/assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('NiceAdmin/assets/css/sweetaler.css') }}" rel="stylesheet">
+    <link href="{{ asset('NiceAdmin/assets/css/sweetalert/sweetalert.css') }}" rel="stylesheet">
+    <link href="https:////cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
 
     <!-- =======================================================
   * Template Name: NiceAdmin - v2.5.0
@@ -62,7 +65,7 @@
                     </a>
                 </li><!-- End Search Icon-->
 
-                <li class="nav-item dropdown pe-3">
+                {{-- <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
                         data-bs-toggle="dropdown">
@@ -118,7 +121,7 @@
                         </li>
 
                     </ul><!-- End Profile Dropdown Items -->
-                </li><!-- End Profile Nav -->
+                </li><!-- End Profile Nav --> --}}
 
             </ul>
         </nav><!-- End Icons Navigation -->
@@ -131,46 +134,52 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('welcome') ? 'collapsed' : ''}}" href="/welcome">
-                    <i class="`"></i>
+                <a class="nav-link {{ Request::is('welcome') ? 'collapsed' : '' }}" href="/welcome">
+                    <i class="bx bx-grid-alt"></i>
                     <span>Beranda</span>
                 </a>
 
             </li><!-- End Dashboard Nav -->
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('datapenabung') ? 'collapsed' : ''}}" href="/datapenabung">
-                    <i class="fas fa-pencil"></i>
+                <a class="nav-link {{ Request::is('datapenabung') ? 'collapsed' : '' }}" href="/datapenabung">
+                    <i class="bx bx-user"></i>
                     <span>Data Penabung</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('uangmasuk') ? 'collapsed' : ''}}" href="/uangmasuk">
-                    <i class="bi bi-grid"></i>
+                <a class="nav-link {{ Request::is('uangmasuk') ? 'collapsed' : '' }}" href="/uangmasuk">
+                    <i class="bx bx-wallet"></i>
                     <span>Uang Ditabung</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('uangkeluar') ? 'collapsed' : ''}}" href="/uangkeluar">
-                  <i class="bi bi-grid"></i>
-                  <span>Uang Ditarik</span>
+                <a class="nav-link {{ Request::is('uangkeluar') ? 'collapsed' : '' }}" href="/uangkeluar">
+                    <i class="bx bx-dollar-circle"></i>
+                    <span>Uang Ditarik</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('histori') ? 'collapsed' : ''}}" href="/histori">
-                    <i class="bi bi-grid"></i>
+                <a class="nav-link {{ Request::is('histori') ? 'collapsed' : '' }}" href="/histori">
+                    <i class="bx bx-task"></i>
                     <span>Histori</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('laporan') ? 'collapsed' : ''}}" href="/laporan">
-                  <i class="bi bi-grid"></i>
-                  <span>Laporan</span>
+                <a class="nav-link {{ Request::is('laporanmasuk') ? 'collapsed' : '' }}" href="/laporanmasuk">
+                    <i class="bx bx-notepad"></i>
+                    <span>Laporan Uang Ditabung</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('logout') ? 'collapsed' : ''}}" href="/logout">
-                  <i class="bi bi-grid"></i>
-                  <span>Keluar</span>
+                <a class="nav-link {{ Request::is('laporankeluar') ? 'collapsed' : '' }}" href="/laporankeluar">
+                    <i class="bx bx-notepad"></i>
+                    <span>Laporan Uang Ditarik</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('logout') ? 'collapsed' : '' }}" href="/logout">
+                    <i class="bx bx-log-out"></i>
+                    <span>Keluar</span>
                 </a>
             </li>
         </ul>
@@ -216,6 +225,15 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('NiceAdmin/assets/js/main.js') }}"></script>
+    <script src="{{ asset('NiceAdmin/assets/css/sweetalert/jquery.sweetalert.js') }}"></script>
+    <script src="{{ asset('NiceAdmin/assets/css/sweetalert/sweetalert.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
 
 </body>
 

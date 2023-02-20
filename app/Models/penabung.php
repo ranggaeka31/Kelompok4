@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\uangkeluar;
 use App\Models\uangmasuk;
+use App\Models\laporanmasuk;
+use App\Models\laporankeluar;
 
 class penabung extends Model
 {
@@ -20,5 +22,13 @@ class penabung extends Model
     public function uangkeluar()
     {
         return $this->hasMany(uangkeluar::class);
+    }
+    public function laporanmasuk()
+    {
+        return $this->hasMany(laporanmasuk::class);
+    }
+    public function laporankeluar()
+    {
+        return $this->hasMany(laporankeluar::class);
     }
 }
