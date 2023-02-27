@@ -19,9 +19,12 @@ use App\Http\Controllers\LaporanController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Login
 Route::get('/', function () {
     return view('login');
+});
+Route::get('/tabel', function () {
+    return view('datatabel');
 });
 
 
@@ -36,44 +39,51 @@ Route::post('/registeruser', [LoginController::class, 'registeruser'])->name('re
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
-//Penabung
-Route::get('/datapenabung', [PenabungController::class, 'datapenabung'])->name('datapenabung');
-Route::get('/tambahpenabung', [PenabungController::class, 'tambahpenabung'])->name('tambahpenabung');
-Route::post('/insertpenabung', [PenabungController::class, 'insertpenabung'])->name('insertpenabung');
-Route::get('/editpenabung/{id}', [PenabungController::class, 'editpenabung'])->name('editpenabung');
-Route::post('/updatepenabung/{id}', [PenabungController::class, 'updatepenabung'])->name('updatepenabung');
-Route::get('/hapuspenabung/{id}', [PenabungController::class, 'hapuspenabung'])->name('hapuspenabung');
 
-//uangkeluar
-Route::get('/uangkeluar', [uangkeluarcontroller::class, 'uangkeluar'])->name('uangkeluar');
-Route::get('/tambahuangkeluar', [uangkeluarcontroller::class, 'tambahuangkeluar'])->name('tambahuangkeluar');
-Route::post('/insertuangkeluar', [uangkeluarcontroller::class, 'insertuangkeluar'])->name('insertuangkeluar');
-Route::get('/edituangkeluar/{id}', [uangkeluarcontroller::class, 'edituangkeluar'])->name('edituangkeluar');
-Route::post('/updateuangkeluar/{id}', [uangkeluarcontroller::class, 'updateuangkeluar'])->name('updateuangkeluar');
-Route::get('/hapusuangkeluar/{id}', [uangkeluarcontroller::class, 'hapusuangkeluar'])->name('hapusuangkeluar');
+Route::group(['middleware' => ['auth', 'hakakses:servis,admin']], function () {
+
+    //Penabung
+    Route::get('/datapenabung', [PenabungController::class, 'datapenabung'])->name('datapenabung');
+    Route::get('/tambahpenabung', [PenabungController::class, 'tambahpenabung'])->name('tambahpenabung');
+    Route::post('/insertpenabung', [PenabungController::class, 'insertpenabung'])->name('insertpenabung');
+    Route::get('/editpenabung/{id}', [PenabungController::class, 'editpenabung'])->name('editpenabung');
+    Route::post('/updatepenabung/{id}', [PenabungController::class, 'updatepenabung'])->name('updatepenabung');
+    Route::get('/hapuspenabung/{id}', [PenabungController::class, 'hapuspenabung'])->name('hapuspenabung');
 
 
-//uangmasuk
-Route::get('/uangmasuk', [uangmasukcontroller::class, 'uangmasuk'])->name('uangmasuk');
-Route::get('/tambahuangmasuk', [uangmasukcontroller::class, 'tambahuangmasuk'])->name('tambahuangmasuk');
-Route::post('/insertuangmasuk', [uangmasukcontroller::class, 'insertuangmasuk'])->name('insertuangmasuk');
-Route::get('/edituangmasuk/{id}', [uangmasukcontroller::class, 'edituangmasuk'])->name('edituangmasuk');
-Route::post('/updateuangmasuk/{id}', [uangmasukcontroller::class, 'updateuangmasuk'])->name('updateuangmasuk');
-Route::get('/hapusuangmasuk/{id}', [uangmasukcontroller::class, 'hapusuangmasuk'])->name('hapusuangmasuk');
+    //uangkeluar
+    Route::get('/uangkeluar', [uangkeluarcontroller::class, 'uangkeluar'])->name('uangkeluar');
+    Route::get('/tambahuangkeluar', [uangkeluarcontroller::class, 'tambahuangkeluar'])->name('tambahuangkeluar');
+    Route::post('/insertuangkeluar', [uangkeluarcontroller::class, 'insertuangkeluar'])->name('insertuangkeluar');
+    Route::get('/edituangkeluar/{id}', [uangkeluarcontroller::class, 'edituangkeluar'])->name('edituangkeluar');
+    Route::post('/updateuangkeluar/{id}', [uangkeluarcontroller::class, 'updateuangkeluar'])->name('updateuangkeluar');
+    Route::get('/hapusuangkeluar/{id}', [uangkeluarcontroller::class, 'hapusuangkeluar'])->name('hapusuangkeluar');
 
 
-//Histori
-Route::get('/histori', [HistoriController::class, 'histori'])->name('histori');
+    //uangmasuk
+    Route::get('/uangmasuk', [uangmasukcontroller::class, 'uangmasuk'])->name('uangmasuk');
+    Route::get('/tambahuangmasuk', [uangmasukcontroller::class, 'tambahuangmasuk'])->name('tambahuangmasuk');
+    Route::post('/insertuangmasuk', [uangmasukcontroller::class, 'insertuangmasuk'])->name('insertuangmasuk');
+    Route::get('/edituangmasuk/{id}', [uangmasukcontroller::class, 'edituangmasuk'])->name('edituangmasuk');
+    Route::post('/updateuangmasuk/{id}', [uangmasukcontroller::class, 'updateuangmasuk'])->name('updateuangmasuk');
+    Route::get('/hapusuangmasuk/{id}', [uangmasukcontroller::class, 'hapusuangmasuk'])->name('hapusuangmasuk');
 
 
-//Laporan
-Route::get('/laporanmasuk', [LaporanController::class, 'laporanmasuk'])->name('laporanmasuk');
-Route::post('/laporanmasuk', [LaporanController::class, 'searchmasuk'])->name('laporanmasuk');
-Route::get('/laporankeluar', [LaporanController::class, 'laporankeluar'])->name('laporankeluar');
-Route::post('/laporankeluar', [LaporanController::class, 'searchkeluar'])->name('laporankeluar');
-// Route::get('/hapuspenabung', [PenabungController::class, 'hapuspenabung'])->name('hapuspenabung');
+    //Histori
+    Route::get('/histori', [HistoriController::class, 'histori'])->name('histori');
 
 
-//PDF
-Route::get('/masukpdf', [LaporanController::class, 'masukpdf'])->name('masukpdf');
-Route::get('/keluarpdf', [LaporanController::class, 'keluarpdf'])->name('keluarpdf');
+    //Laporan
+    Route::get('/laporanmasuk', [LaporanController::class, 'laporanmasuk'])->name('laporanmasuk');
+    Route::post('/laporanmasuk', [LaporanController::class, 'searchmasuk'])->name('laporanmasuk');
+    Route::get('/laporankeluar', [LaporanController::class, 'laporankeluar'])->name('laporankeluar');
+    Route::post('/laporankeluar', [LaporanController::class, 'searchkeluar'])->name('laporankeluar');
+
+
+    //PDF
+    Route::get('/masukpdf', [LaporanController::class, 'masukpdf'])->name('masukpdf');
+    Route::get('/keluarpdf', [LaporanController::class, 'keluarpdf'])->name('keluarpdf');
+    //Excel
+    Route::get('/masukexcel', [LaporanController::class, 'masukexcel'])->name('masukexcel');
+    Route::get('/keluarexcel', [LaporanController::class, 'keluarexcel'])->name('keluarexcel');
+});

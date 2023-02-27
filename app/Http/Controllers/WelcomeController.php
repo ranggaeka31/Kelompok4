@@ -34,7 +34,7 @@ class WelcomeController extends Controller
             $previousMonths = [];
 
         $currentDate = now()->startOfMonth();
-        while ($currentDate->month == Carbon::now()->month) {
+        while ($currentDate->year == Carbon::now()->year) {
             $previousMonths[] = $currentDate->format('M, Y');
             $currentDate->subMonth();
         }

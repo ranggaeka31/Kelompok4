@@ -7,6 +7,7 @@ use App\Models\uangkeluar;
 use App\Models\penabung;
 use App\Models\laporankeluar;
 use App\Models\histori;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 
 class UangkeluarController extends Controller
@@ -44,12 +45,6 @@ class UangkeluarController extends Controller
                 'errors' => $validator->errors()->messages(),
             ]);
         }
-        $penabung = penabung::find($request->penabungs_id);
-        if ($penabung->jumlah_uang < $request->penarikan) {
-            return response()->json([
-                'gagal' => 'Jumlah Uang Melebihi Tabungan',
-            ]);
-        } else {
         $data = uangkeluar::create([
             'penabungs_id' => $request->penabungs_id,
             'jenis_kelamin' => $request->jenis_kelamin,
@@ -58,6 +53,7 @@ class UangkeluarController extends Controller
             'jumlah_uang' => $request->jumlah_uang,
             'penarikan' => $request->penarikan,
         ]);
+
         $datas = histori::create([
             'nama' => $request->penabungs_id,
             'uangditabung' => $request->jumlah_uang,
@@ -71,6 +67,11 @@ class UangkeluarController extends Controller
             'jumlah_uang' => $request->jumlah_uang,
             'penarikan' => $request->penarikan,
         ]);
+        $penabung = uangkeluar::find($request->penabungs_id);
+        if ($penabung->jumlah_uang < $request->penarikan) {
+            Alert::error('Error','Jumlah penarikan Melebihi tabungan');
+            return back();
+        } else {
         $stok_kurang = penabung::find($request->penabungs_id);
         $stok_nambah = penabung::find($request->penabungs_id);
         $stok_kurang->jumlah_uang -= $request->penarikan;
@@ -78,13 +79,10 @@ class UangkeluarController extends Controller
         $stok_nambah->jumlah_ditarik += $request->penarikan;
         $stok_nambah->save();
         $jumlahstok = $stok_kurang->jumlah_uang;
-        return response()->json([
-            'status' => 200,
-            'message' => 'uang keluar berhasil ditambahkan',
-            'jumlahstok' => $jumlahstok,
-        ]);
 
-    }
+            return redirect()->route('uangkeluar')->with('success', 'Berhasil Menarik uang');
+        }
+
 }
 
 

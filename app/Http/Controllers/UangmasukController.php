@@ -54,7 +54,7 @@ class UangmasukController extends Controller
         ]);
         $stok_nambah->jumlah_uang += $request->jumlah_uang;
         $stok_nambah->save();
-        return redirect()->route('uangmasuk')->with('success', 'Data Berhasil Di Tambahkan');
+        return redirect()->route('uangmasuk')->with('success', 'Berhasil Menambahkan tabungan');
     }
 
 

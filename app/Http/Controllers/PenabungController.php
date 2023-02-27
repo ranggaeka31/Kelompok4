@@ -45,7 +45,7 @@ class PenabungController extends Controller
             $data->foto = $request->file('foto')->getClientOriginalName();
             $data->save();
         }
-        return redirect()->route('datapenabung')->with('success', 'Data Berhasil Di Tambahkan');
+        return redirect()->route('datapenabung')->with('success', 'Berhasil Menambahkan data penabung');
     }
 
 
@@ -74,7 +74,7 @@ class PenabungController extends Controller
             $data->foto = $request->file('foto')->getClientOriginalName();
             $data->save();
         }
-        return redirect()->route('datapenabung')->with('success', 'Data berhasil di Update!');
+        return redirect()->route('datapenabung')->with('success', 'Berhasil Mengedit data penabung');
     }
 
 
@@ -83,6 +83,6 @@ class PenabungController extends Controller
     {
         $data = penabung::find($id);
         $data->delete();
-        return redirect()->route('datapenabung')->with('success', 'Data Berhasil Di Hapus');
+        return redirect()->route('datapenabung')->with('success', 'Berhasil Menghapus data penabung');
     }
 }

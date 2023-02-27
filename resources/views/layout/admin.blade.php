@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Tabungan</title>
+    {{-- <title>Tabungan</title> --}}
+    @yield('title')
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -26,14 +27,24 @@
     <link href="{{ asset('NiceAdmin/assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
     <link href="{{ asset('NiceAdmin/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
     <link href="{{ asset('NiceAdmin/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-    <link href="{{ asset('NiceAdmin/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
     <link href="{{ asset('NiceAdmin/assets/fontawesome/css/fontawesome.css') }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('NiceAdmin/assets/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('NiceAdmin/assets/css/sweetaler.css') }}" rel="stylesheet">
-    <link href="{{ asset('NiceAdmin/assets/css/sweetalert/sweetalert.css') }}" rel="stylesheet">
-    <link href="https:////cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.min.css">
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.7/dist/sweetalert2.all.min.js"></script>
+    {{-- <link href="{{ asset('NiceAdmin/assets/css/sweetalert/sweetalert.css') }}" rel="stylesheet"> --}}
+
+      <!-- DataTables -->
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+  <link href="{{ asset('NiceAdmin/assets/js/sweetalert.css') }}" rel="stylesheet">
 
     <!-- =======================================================
   * Template Name: NiceAdmin - v2.5.0
@@ -132,50 +143,62 @@
     <aside id="sidebar" class="sidebar">
 
         <ul class="sidebar-nav" id="sidebar-nav">
-
+            @if (auth()->user()->role == 'admin')
             <li class="nav-item">
                 <a class="nav-link {{ Request::is('welcome') ? 'collapsed' : '' }}" href="/welcome">
                     <i class="bx bx-grid-alt"></i>
                     <span>Beranda</span>
                 </a>
-
-            </li><!-- End Dashboard Nav -->
+            </li>
+            @endif
+            @if (auth()->user()->role == 'admin')
             <li class="nav-item">
                 <a class="nav-link {{ Request::is('datapenabung') ? 'collapsed' : '' }}" href="/datapenabung">
                     <i class="bx bx-user"></i>
                     <span>Data Penabung</span>
                 </a>
             </li>
+            @endif
+            @if (auth()->user()->role == 'admin')
             <li class="nav-item">
                 <a class="nav-link {{ Request::is('uangmasuk') ? 'collapsed' : '' }}" href="/uangmasuk">
                     <i class="bx bx-wallet"></i>
                     <span>Uang Ditabung</span>
                 </a>
             </li>
+            @endif
+            @if (auth()->user()->role == 'admin')
             <li class="nav-item">
                 <a class="nav-link {{ Request::is('uangkeluar') ? 'collapsed' : '' }}" href="/uangkeluar">
                     <i class="bx bx-dollar-circle"></i>
                     <span>Uang Ditarik</span>
                 </a>
             </li>
+            @endif
+            @if (auth()->user()->role == 'admin')
             <li class="nav-item">
                 <a class="nav-link {{ Request::is('histori') ? 'collapsed' : '' }}" href="/histori">
                     <i class="bx bx-task"></i>
                     <span>Histori</span>
                 </a>
             </li>
+            @endif
+            @if (auth()->user()->role == 'admin')
             <li class="nav-item">
                 <a class="nav-link {{ Request::is('laporanmasuk') ? 'collapsed' : '' }}" href="/laporanmasuk">
                     <i class="bx bx-notepad"></i>
                     <span>Laporan Uang Ditabung</span>
                 </a>
             </li>
+            @endif
+            @if (auth()->user()->role == 'admin')
             <li class="nav-item">
                 <a class="nav-link {{ Request::is('laporankeluar') ? 'collapsed' : '' }}" href="/laporankeluar">
                     <i class="bx bx-notepad"></i>
                     <span>Laporan Uang Ditarik</span>
                 </a>
             </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link {{ Request::is('logout') ? 'collapsed' : '' }}" href="/logout">
                     <i class="bx bx-log-out"></i>
@@ -218,22 +241,55 @@
     <script src="{{ asset('NiceAdmin/assets/vendor/chart.js/chart.umd.js') }}"></script>
     <script src="{{ asset('NiceAdmin/assets/vendor/echarts/echarts.min.js') }}"></script>
     <script src="{{ asset('NiceAdmin/assets/vendor/quill/quill.min.js') }}"></script>
-    <script src="{{ asset('NiceAdmin/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
     <script src="{{ asset('NiceAdmin/assets/vendor/tinymce/tinymce.min.js') }}"></script>
     <script src="{{ asset('NiceAdmin/assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('NiceAdmin/assets/fontawesome/js/fontawesome.js') }}"></script>
 
     <!-- Template Main JS File -->
     <script src="{{ asset('NiceAdmin/assets/js/main.js') }}"></script>
-    <script src="{{ asset('NiceAdmin/assets/css/sweetalert/jquery.sweetalert.js') }}"></script>
-    <script src="{{ asset('NiceAdmin/assets/css/sweetalert/sweetalert.js') }}"></script>
+    {{-- <script src="{{ asset('NiceAdmin/assets/css/sweetalert/jquery.sweetalert.js') }}"></script> --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script> --}}
     <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript"></script>
-    <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable();
-        });
-    </script>
+
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+<script src="{{ asset('NiceAdmin/assets/js/sweetalert.min.js') }}"></script>
+<script src="{{ asset('NiceAdmin/assets/js/jquery.sweet-alert.js') }}"></script>
+
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["excel", "pdf"],
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
 
 </body>
 

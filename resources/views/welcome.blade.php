@@ -1,6 +1,9 @@
 @extends('layout.admin')
 
 @section('content')
+@section('title')
+    <title>Tabungan</title>
+@endsection
     <div class="pagetitle">
         <h1>Dashboard</h1>
         <nav>

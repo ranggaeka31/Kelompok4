@@ -9,6 +9,8 @@ use App\Models\laporanmasuk;
 use App\Models\laporankeluar;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\laporanmasukExport;
 
 class LaporanController extends Controller
 {
@@ -61,5 +63,11 @@ class LaporanController extends Controller
         view()->share('array', $data);
         $pdf = PDF::loadview('laporankeluarpdf');
         return $pdf->download('laporanditarik.pdf', compact('data'));
+    }
+
+
+    public function masukexcel()
+    {
+        return Excel::download(new laporanmasukExport('rangga'), 'laporantabungan.xlsx');
     }
 }

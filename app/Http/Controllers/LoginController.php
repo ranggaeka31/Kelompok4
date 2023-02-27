@@ -25,7 +25,7 @@ class LoginController extends Controller
             'password.required' => 'Harus Diisi!',
             'password.min' => 'Minimal 6 huruf!',
         ]);
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => 'admin'])) {
             return redirect('/welcome');
         }
 
