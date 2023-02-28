@@ -68,6 +68,9 @@
                     <input type="number" class="form-control" name="penarikan" id="penarikan">
                 </div>
             </div>
+            @error('penarikan')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
 
             <div class="mb-3">
                 <button class="btn btn-success" id="proses" type="submit">Tarik Uang</button>

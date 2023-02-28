@@ -9,7 +9,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     @section('title')
-        <title>Tabungan</title>
+        <title>Menabung Uang</title>
     @endsection
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -42,7 +42,7 @@
                     @foreach ($uangmasuk as $row)
                         <tr>
                             <th scope="row">{{ $no++ }}</th>
-                            <td>{{ $row->created_at->translatedFormat('l/d/F/Y : H:i') }}</td>
+                            <td>{{ $row->created_at->translatedFormat('l/d/F/Y') }}</td>
                             <td>{{ $row->penabung ? $row->penabung->nama_penabung : 'Data Tidak Ada' }}</td>
                             <td>{{ $row->jenis_kelamin }}</td>
                             <td>{{ $row->alamat }}</td>

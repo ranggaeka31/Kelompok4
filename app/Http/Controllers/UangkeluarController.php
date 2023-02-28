@@ -45,6 +45,11 @@ class UangkeluarController extends Controller
                 'errors' => $validator->errors()->messages(),
             ]);
         }
+        $penabung = penabung::find($request->penabungs_id);
+        if ($penabung->jumlah_uang < $request->penarikan) {
+            Alert::error('Error','Jumlah penarikan Melebihi tabungan');
+            return back();
+        } else {
         $data = uangkeluar::create([
             'penabungs_id' => $request->penabungs_id,
             'jenis_kelamin' => $request->jenis_kelamin,
@@ -67,11 +72,6 @@ class UangkeluarController extends Controller
             'jumlah_uang' => $request->jumlah_uang,
             'penarikan' => $request->penarikan,
         ]);
-        $penabung = uangkeluar::find($request->penabungs_id);
-        if ($penabung->jumlah_uang < $request->penarikan) {
-            Alert::error('Error','Jumlah penarikan Melebihi tabungan');
-            return back();
-        } else {
         $stok_kurang = penabung::find($request->penabungs_id);
         $stok_nambah = penabung::find($request->penabungs_id);
         $stok_kurang->jumlah_uang -= $request->penarikan;

@@ -58,6 +58,9 @@
                     <input type="number" class="form-control" name="jumlah_uang">
                 </div>
             </div>
+            @error('jumlah_uang')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
 
             <div class="mb-3">
                 <button class="btn btn-success" type="submit">Tambah</button>

@@ -19,7 +19,7 @@ class WelcomeController extends Controller
         $penabung = penabung::count();
         $uangmasuk = penabung::sum('jumlah_uang');
         $penarikan = penabung::sum('jumlah_ditarik');
-        $jumlah_tabungan = $uangmasuk - $penarikan;
+        // $jumlah_tabungan = $uangmasuk - $penarikan;
 
         $uang_ditabung = penabung::query()
         ->selectRaw('id, nama_penabung, jenis_kelamin, alamat, notelpon, jumlah_ditarik, foto, created_at, SUM(jumlah_uang) as jumlah_uang')
@@ -66,6 +66,6 @@ class WelcomeController extends Controller
         }
 
 
-        return view('welcome', compact('penabung', 'jumlah_tabungan','uangditarik','uangditabung','previousMonths'));
+        return view('welcome', compact('penabung', 'uangmasuk','penarikan','uangditarik','uangditabung','previousMonths'));
     }
 }
