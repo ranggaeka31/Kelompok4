@@ -20,14 +20,14 @@ class LaporanController extends Controller
         $subtotal = uangmasuk::sum('jumlah_uang');
         return view('histori.laporanmasuk', compact('uangmasuk', 'subtotal'));
     }
-    public function searchmasuk(Request $request)
-    {
-        $mulai = $request->input('mulai');
-        $akhir = $request->input('akhir');
-        $uangmasuk = uangmasuk::with('penabung')->whereBetween(DB::raw("DATE(created_at)"), [$mulai, $akhir])->orderBy('created_at', 'DESC')->get();
-        $subtotal = uangmasuk::whereBetween(DB::raw("DATE(created_at)"), [$mulai, $akhir])->sum('jumlah_uang');
-        return view('histori.laporanmasuk', compact('uangmasuk', 'subtotal'));
-    }
+    // public function searchmasuk(Request $request)
+    // {
+    //     $mulai = $request->input('mulai');
+    //     $akhir = $request->input('akhir');
+    //     $uangmasuk = uangmasuk::with('penabung')->whereBetween(DB::raw("DATE(created_at)"), [$mulai, $akhir])->orderBy('created_at', 'DESC')->get();
+    //     $subtotal = uangmasuk::whereBetween(DB::raw("DATE(created_at)"), [$mulai, $akhir])->sum('jumlah_uang');
+    //     return view('histori.laporanmasuk', compact('uangmasuk', 'subtotal'));
+    // }
 
 
 
@@ -39,14 +39,14 @@ class LaporanController extends Controller
         return view('histori.laporankeluar', compact('uangkeluar', 'subtotal'));
     }
 
-    public function searchkeluar(Request $request)
-    {
-        $mulai = $request->input('mulai');
-        $akhir = $request->input('akhir');
-        $uangkeluar = uangkeluar::with('penabung')->whereBetween(DB::raw("DATE(created_at)"), [$mulai, $akhir])->orderBy('created_at', 'DESC')->get();
-        $subtotal = uangkeluar::whereBetween(DB::raw("DATE(created_at)"), [$mulai, $akhir])->sum('penarikan');
-        return view('histori.laporankeluar', compact('uangkeluar', 'subtotal'));
-    }
+    // public function searchkeluar(Request $request)
+    // {
+    //     $mulai = $request->input('mulai');
+    //     $akhir = $request->input('akhir');
+    //     $uangkeluar = uangkeluar::with('penabung')->whereBetween(DB::raw("DATE(created_at)"), [$mulai, $akhir])->orderBy('created_at', 'DESC')->get();
+    //     $subtotal = uangkeluar::whereBetween(DB::raw("DATE(created_at)"), [$mulai, $akhir])->sum('penarikan');
+    //     return view('histori.laporankeluar', compact('uangkeluar', 'subtotal'));
+    // }
 
     public function masukpdf()
     {

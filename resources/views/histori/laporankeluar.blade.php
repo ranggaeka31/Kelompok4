@@ -15,35 +15,6 @@
   </head>
   <body>
     <h1 class="text-center">Laporan Uang Ditarik</h1>
-    <form action="/laporankeluar" method="POST">
-        @csrf
-        <div class="container mt-5">
-            <div class="row">
-                <div class="container-fluid">
-                    <div class="form-group row">
-                        <label for="date" class="col-form-label col-sm-2">Cari Tanggal Dari</label>
-                        <div class="col-sm-3">
-                            <input type="date" class="form-control input-sm" id="mulai"
-                                name="mulai">
-                        </div>
-                        <label for="date" class="col-form-label col-sm-2">Cari Tanggal
-                            Sampai</label>
-                        <div class="col-sm-3">
-                            <input type="date" class="form-control input-sm" id="akhir"
-                                name="akhir">
-                        </div>
-                        <div class="col-sm-2">
-                            <button class="btn btn-danger" type="submit" name="search" title="Search">Cari
-                                <i class="ti-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </form>
     <div class="row mt-3">
         <div class="container">
             <table class="table table-hover" id="example1">
